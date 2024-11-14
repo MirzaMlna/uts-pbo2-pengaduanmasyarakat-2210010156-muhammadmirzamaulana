@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -48,12 +49,14 @@ public class LaporanFrame extends javax.swing.JFrame {
 
         jLabel4 = new javax.swing.JLabel();
         judul_laporan_input = new javax.swing.JTextField();
-        judul = new javax.swing.JTextField();
+        id_pelapor_input = new javax.swing.JTextField();
         isi_laporan_input = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        laporan_submit = new javax.swing.JButton();
+        laporan_add = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        laporan_edit = new javax.swing.JButton();
+        laporan_delete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,10 +69,10 @@ public class LaporanFrame extends javax.swing.JFrame {
             }
         });
 
-        judul.setName("judul"); // NOI18N
-        judul.addActionListener(new java.awt.event.ActionListener() {
+        id_pelapor_input.setName("id_pelapor_input"); // NOI18N
+        id_pelapor_input.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                judulActionPerformed(evt);
+                id_pelapor_inputActionPerformed(evt);
             }
         });
 
@@ -83,12 +86,33 @@ public class LaporanFrame extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Frame Laporan");
 
-        laporan_submit.setText("Masukkan Data");
-        laporan_submit.setName("laporan_submit"); // NOI18N
+        laporan_add.setText("Masukkan Data");
+        laporan_add.setName("laporan_add"); // NOI18N
+        laporan_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                laporan_addActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("ID Pelapor");
 
         jLabel3.setText("Judul Laporan");
+
+        laporan_edit.setText("Ubah Data");
+        laporan_edit.setName("laporan_submit"); // NOI18N
+        laporan_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                laporan_editActionPerformed(evt);
+            }
+        });
+
+        laporan_delete.setText("Hapus Data");
+        laporan_delete.setName("laporan_submit"); // NOI18N
+        laporan_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                laporan_deleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -96,20 +120,25 @@ public class LaporanFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(judul_laporan_input, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(isi_laporan_input, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(judul, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(laporan_submit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addComponent(laporan_edit, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(laporan_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel1)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(judul_laporan_input, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(isi_laporan_input, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(id_pelapor_input, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(laporan_add, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,7 +148,7 @@ public class LaporanFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(judul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(id_pelapor_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(judul_laporan_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -129,8 +158,12 @@ public class LaporanFrame extends javax.swing.JFrame {
                     .addComponent(isi_laporan_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(laporan_submit)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addComponent(laporan_add)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(laporan_edit)
+                    .addComponent(laporan_delete))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -140,13 +173,100 @@ public class LaporanFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_judul_laporan_inputActionPerformed
 
-    private void judulActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_judulActionPerformed
+    private void id_pelapor_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_pelapor_inputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_judulActionPerformed
+    }//GEN-LAST:event_id_pelapor_inputActionPerformed
 
     private void isi_laporan_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_isi_laporan_inputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_isi_laporan_inputActionPerformed
+
+    private void laporan_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laporan_addActionPerformed
+        try {
+        String saveData = "insert into laporan (id_pelapor, judul_laporan, isi_laporan) values (?,?,?)";
+        PreparedStatement primaryKeyCheck = connection.prepareStatement("select * from laporan where id_pelapor = ?");
+        primaryKeyCheck.setString(1, id_pelapor_input.getText());
+        
+        ResultSet dataResult = primaryKeyCheck.executeQuery();
+        
+        if (dataResult.next()) {
+            JOptionPane.showMessageDialog(null, "Kode Primary Key Sudah Terdaftar");
+        } else {
+            PreparedStatement saveQuery = connection.prepareStatement(saveData);
+            saveQuery.setString(1, id_pelapor_input.getText());
+            saveQuery.setString(2, judul_laporan_input.getText());
+            saveQuery.setString(3, isi_laporan_input.getText());
+            saveQuery.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Berhasil Menyimpan Data");
+        }
+        // Menutup resource di dalam blok finally atau setelah selesai
+        primaryKeyCheck.close();
+        dataResult.close();
+    } catch (Exception e) {
+        System.err.println(e.toString());
+    }
+    }//GEN-LAST:event_laporan_addActionPerformed
+
+    private void laporan_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laporan_editActionPerformed
+        try {
+        String checkSQL = "SELECT * FROM laporan WHERE id_pelapor = ?";
+        PreparedStatement checkQuery = connection.prepareStatement(checkSQL);
+        checkQuery.setString(1, id_pelapor_input.getText());
+
+        ResultSet dataResult = checkQuery.executeQuery();
+
+        if (dataResult.next()) {
+            // Query untuk update data
+            String updateSQL = "UPDATE laporan SET judul_laporan = ?, isi_laporan = ? WHERE id_pelapor = ?";
+            PreparedStatement updateQuery = connection.prepareStatement(updateSQL);
+            updateQuery.setString(1, judul_laporan_input.getText());
+            updateQuery.setString(2, isi_laporan_input.getText());
+            updateQuery.setString(3, id_pelapor_input.getText());
+            updateQuery.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Data Berhasil Diperbarui");
+
+            updateQuery.close();
+        } else {
+            JOptionPane.showMessageDialog(null, "ID Pelapor tidak ditemukan");
+        }
+
+        checkQuery.close();
+        dataResult.close();
+    } catch (Exception e) {
+        System.err.println(e.toString());
+    }
+    }//GEN-LAST:event_laporan_editActionPerformed
+
+    private void laporan_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_laporan_deleteActionPerformed
+        try {
+        String checkSQL = "SELECT * FROM laporan WHERE id_pelapor = ?";
+        PreparedStatement checkQuery = connection.prepareStatement(checkSQL);
+        checkQuery.setString(1, id_pelapor_input.getText());
+
+        ResultSet dataResult = checkQuery.executeQuery();
+
+        if (dataResult.next()) {
+            // Query untuk menghapus data
+            String deleteSQL = "DELETE FROM laporan WHERE id_pelapor = ?";
+            PreparedStatement deleteQuery = connection.prepareStatement(deleteSQL);
+            deleteQuery.setString(1, id_pelapor_input.getText());
+            deleteQuery.executeUpdate();
+
+            JOptionPane.showMessageDialog(null, "Data Berhasil Dihapus");
+
+            deleteQuery.close();
+        } else {
+            JOptionPane.showMessageDialog(null, "ID Pelapor tidak ditemukan");
+        }
+
+        checkQuery.close();
+        dataResult.close();
+    } catch (Exception e) {
+        System.err.println(e.toString());
+    }
+    }//GEN-LAST:event_laporan_deleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -184,13 +304,15 @@ public class LaporanFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField id_pelapor_input;
     private javax.swing.JTextField isi_laporan_input;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField judul;
     private javax.swing.JTextField judul_laporan_input;
-    private javax.swing.JButton laporan_submit;
+    private javax.swing.JButton laporan_add;
+    private javax.swing.JButton laporan_delete;
+    private javax.swing.JButton laporan_edit;
     // End of variables declaration//GEN-END:variables
 }

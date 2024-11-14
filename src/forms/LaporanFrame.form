@@ -25,24 +25,31 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="judul_laporan_input" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
-                          <Component id="isi_laporan_input" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
-                          <Component id="judul" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="laporan_edit" min="-2" pref="121" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="laporan_delete" min="-2" pref="127" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="laporan_submit" alignment="1" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="judul_laporan_input" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
+                              <Component id="isi_laporan_input" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
+                              <Component id="id_pelapor_input" alignment="0" min="-2" pref="159" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="laporan_add" alignment="1" min="-2" pref="251" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <EmptySpace pref="27" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -54,7 +61,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="judul" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="id_pelapor_input" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -67,8 +74,13 @@
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="laporan_submit" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <Component id="laporan_add" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="laporan_edit" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="laporan_delete" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -87,12 +99,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="judul_laporan_inputActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="judul">
+    <Component class="javax.swing.JTextField" name="id_pelapor_input">
       <Properties>
-        <Property name="name" type="java.lang.String" value="judul" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="id_pelapor_input" noResource="true"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="judulActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="id_pelapor_inputActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="isi_laporan_input">
@@ -111,11 +123,14 @@
         <Property name="text" type="java.lang.String" value="Frame Laporan"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="laporan_submit">
+    <Component class="javax.swing.JButton" name="laporan_add">
       <Properties>
         <Property name="text" type="java.lang.String" value="Masukkan Data"/>
-        <Property name="name" type="java.lang.String" value="laporan_submit" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="laporan_add" noResource="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="laporan_addActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -126,6 +141,24 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Judul Laporan"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="laporan_edit">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ubah Data"/>
+        <Property name="name" type="java.lang.String" value="laporan_submit" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="laporan_editActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="laporan_delete">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Hapus Data"/>
+        <Property name="name" type="java.lang.String" value="laporan_submit" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="laporan_deleteActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
