@@ -4,17 +4,38 @@
  */
 package forms;
 
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author User
  */
 public class PelaporFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form PelaporFrame
-     */
+    private String url = "jdbc:mysql://localhost:3306/2210010156_pbo2";
+    private String username = "root";
+    private String password = "";
+    private Connection connection;
+    
     public PelaporFrame() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        
+        try {
+            Driver myDriver = new com.mysql.jdbc.Driver();
+            DriverManager.registerDriver(myDriver);
+            connection = DriverManager.getConnection(url, username, password);
+            System.out.println("Frame Berhasil Dengan Database");
+        } catch (SQLException e) {
+            System.err.println(e.toString());
+        }
     }
 
     /**
@@ -31,11 +52,13 @@ public class PelaporFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        nama_pelapor_input = new javax.swing.JTextField();
+        id_pelapor_input = new javax.swing.JTextField();
+        jk_input = new javax.swing.JTextField();
+        telp_input = new javax.swing.JTextField();
+        pelapor_add = new javax.swing.JButton();
+        pelapor_delete = new javax.swing.JButton();
+        pelapor_edit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,36 +73,57 @@ public class PelaporFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Jenis Kelamin");
 
-        jTextField1.setName("nama_pelapor_input"); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        nama_pelapor_input.setName("nama_pelapor_input"); // NOI18N
+        nama_pelapor_input.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                nama_pelapor_inputActionPerformed(evt);
             }
         });
 
-        jTextField2.setName("id_pelapor_input"); // NOI18N
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        id_pelapor_input.setName("id_pelapor_input"); // NOI18N
+        id_pelapor_input.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                id_pelapor_inputActionPerformed(evt);
             }
         });
 
-        jTextField3.setName("jk_input"); // NOI18N
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        jk_input.setName("jk_input"); // NOI18N
+        jk_input.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                jk_inputActionPerformed(evt);
             }
         });
 
-        jTextField4.setName("telp_pelapor_input"); // NOI18N
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        telp_input.setName("telp_pelapor_input"); // NOI18N
+        telp_input.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                telp_inputActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Masukkan Data");
-        jButton1.setName("pelapor_submit"); // NOI18N
+        pelapor_add.setText("Masukkan Data");
+        pelapor_add.setName("pelapor_add"); // NOI18N
+        pelapor_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pelapor_addActionPerformed(evt);
+            }
+        });
+
+        pelapor_delete.setText("Hapus Data");
+        pelapor_delete.setName("pelapor_add"); // NOI18N
+        pelapor_delete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pelapor_deleteActionPerformed(evt);
+            }
+        });
+
+        pelapor_edit.setText("Ubah Data");
+        pelapor_edit.setName("pelapor_add"); // NOI18N
+        pelapor_edit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pelapor_editActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,21 +131,26 @@ public class PelaporFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(pelapor_add, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(pelapor_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel3)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(nama_pelapor_input, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(telp_input, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jk_input, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(id_pelapor_input, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(pelapor_edit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -112,42 +161,120 @@ public class PelaporFrame extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(id_pelapor_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nama_pelapor_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(telp_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jk_input, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pelapor_add)
+                    .addComponent(pelapor_delete))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pelapor_edit)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void nama_pelapor_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nama_pelapor_inputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_nama_pelapor_inputActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void id_pelapor_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_pelapor_inputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_id_pelapor_inputActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void jk_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jk_inputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_jk_inputActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void telp_inputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telp_inputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_telp_inputActionPerformed
+
+    private void pelapor_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pelapor_addActionPerformed
+        try {
+        String saveData = "insert into pelapor (id_pelapor, nama, telp, jenis_kelamin) values (?,?,?,?)";
+        PreparedStatement primaryKeyCheck = connection.prepareStatement("select * from pelapor where id_pelapor = ?");
+        primaryKeyCheck.setString(1, id_pelapor_input.getText());
+        
+        ResultSet dataResult = primaryKeyCheck.executeQuery();
+        
+        if (dataResult.next()) {
+            JOptionPane.showMessageDialog(null, "Kode Primary Key Sudah Terdaftar");
+        } else {
+            PreparedStatement saveQuery = connection.prepareStatement(saveData);
+            saveQuery.setString(1, id_pelapor_input.getText());
+            saveQuery.setString(2, nama_pelapor_input.getText());
+            saveQuery.setString(3, telp_input.getText());
+            saveQuery.setString(4, jk_input.getText());
+            saveQuery.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Berhasil Menyimpan Data");
+        }
+
+        // Menutup resource di dalam blok finally atau setelah selesai
+        primaryKeyCheck.close();
+        dataResult.close();
+    } catch (Exception e) {
+        System.err.println(e.toString());
+    }
+    }//GEN-LAST:event_pelapor_addActionPerformed
+
+    private void pelapor_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pelapor_deleteActionPerformed
+        try {
+            String deleteData = "DELETE FROM pelapor WHERE id_pelapor = ?";
+            PreparedStatement deleteQuery = connection.prepareStatement(deleteData);
+
+            deleteQuery.setString(1, id_pelapor_input.getText());
+
+            int affectedRows = deleteQuery.executeUpdate();
+
+            if (affectedRows > 0) {
+                JOptionPane.showMessageDialog(null, "Berhasil Menghapus Data");
+            } else {
+                JOptionPane.showMessageDialog(null, "Data Tidak Ditemukan");
+            }
+
+            deleteQuery.close();
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+    }//GEN-LAST:event_pelapor_deleteActionPerformed
+
+    private void pelapor_editActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pelapor_editActionPerformed
+        try {
+            String updateData = "UPDATE pelapor SET nama = ?, telp = ?, jenis_kelamin = ? WHERE id_pelapor = ?";
+            PreparedStatement updateQuery = connection.prepareStatement(updateData);
+
+            updateQuery.setString(1, nama_pelapor_input.getText());
+            updateQuery.setString(2, telp_input.getText());
+            updateQuery.setString(3, jk_input.getText());
+            updateQuery.setString(4, id_pelapor_input.getText());
+
+            int affectedRows = updateQuery.executeUpdate();
+
+            if (affectedRows > 0) {
+                JOptionPane.showMessageDialog(null, "Berhasil Memperbarui Data");
+            } else {
+                JOptionPane.showMessageDialog(null, "Data Tidak Ditemukan");
+            }
+
+            updateQuery.close();
+        } catch (Exception e) {
+            System.err.println(e.toString());
+        }
+    }//GEN-LAST:event_pelapor_editActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,15 +312,17 @@ public class PelaporFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField id_pelapor_input;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jk_input;
+    private javax.swing.JTextField nama_pelapor_input;
+    private javax.swing.JButton pelapor_add;
+    private javax.swing.JButton pelapor_delete;
+    private javax.swing.JButton pelapor_edit;
+    private javax.swing.JTextField telp_input;
     // End of variables declaration//GEN-END:variables
 }
